@@ -16,7 +16,9 @@ app.use(morgan("dev"));
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok" });
 });
-
+app.get("/", (req, res) => {
+  res.send("Finance Dashboard Backend API is running 🚀");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/records", recordRoutes);

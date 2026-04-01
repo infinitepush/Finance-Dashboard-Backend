@@ -32,7 +32,7 @@ It provides secure APIs for user management, financial record management, and da
 <li>Express.js</li>
 <li>MongoDB Atlas</li>
 <li>Mongoose</li>
-<li>JWT</li>
+<li>JSON Web Token (JWT)</li>
 <li>express-validator</li>
 <li>bcryptjs</li>
 <li>dotenv</li>
@@ -93,7 +93,22 @@ JWT_EXPIRES_IN=1d
 <p>Use JWT token in request headers:</p>
 <pre>Authorization: Bearer &lt;your_token&gt;</pre>
 
+<h2>How to Test</h2>
+<ul>
+<li>Use Postman or any API client</li>
+<li>Login using seeded admin credentials</li>
+<li>Copy JWT token from response</li>
+<li>Add token in Authorization header</li>
+<li>Test protected endpoints</li>
+</ul>
+
 <h2>API Endpoints</h2>
+
+<h3>Health</h3>
+<table border="1" cellpadding="6">
+<tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
+<tr><td>GET</td><td>/health</td><td>Public</td><td>Service health check</td></tr>
+</table>
 
 <h3>Auth</h3>
 <table border="1" cellpadding="6">
@@ -134,7 +149,7 @@ GET /api/records?type=income&category=salary&page=1&limit=10
 
 <h2>Assumptions & Trade-offs</h2>
 <ul>
-<li>Viewer has read-only access to records</li>
+<li>Viewer has read-only access to financial records</li>
 <li>Analyst can access records and dashboard insights</li>
 <li>Admin has full access</li>
 <li>This differs from stricter viewer-dashboard-only models but reflects real-world use cases</li>

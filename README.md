@@ -1,200 +1,157 @@
-# Finance Dashboard Backend
+<h1>Finance Dashboard Backend</h1>
 
-A clean, modular backend application for a finance dashboard using Node.js, Express, and MongoDB.
+<p>
+GitHub Repository: <a href="https://github.com/infinitepush/Finance-Dashboard-Backend">View Project</a>
+</p>
 
-## Features
+<h2>Project Overview</h2>
+<p>
+This project is a backend service for a finance dashboard built with Node.js, Express, and MongoDB Atlas.
+It provides secure APIs for user management, financial record management, and dashboard analytics with role-based access control.
+</p>
 
-- User management with role and status controls
-- Financial record CRUD APIs
-- Dashboard analytics APIs
-- Role-based access control (RBAC)
-- JWT authentication
-- Input validation and centralized error handling
-- Optional pagination and filtering for record listing
+<h2>Features</h2>
+<ul>
+<li>User and role management (admin, analyst, viewer)</li>
+<li>User status management (active, inactive)</li>
+<li>JWT-based authentication</li>
+<li>Middleware-based RBAC authorization</li>
+<li>Financial records CRUD operations</li>
+<li>Filtering by type, category, and date range</li>
+<li>Pagination support</li>
+<li>Dashboard analytics (income, expenses, trends)</li>
+<li>Input validation using express-validator</li>
+<li>Centralized error handling</li>
+<li>MongoDB Atlas persistence</li>
+<li>Admin seed script</li>
+</ul>
 
-## Tech Stack
+<h2>Tech Stack</h2>
+<ul>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>MongoDB Atlas</li>
+<li>Mongoose</li>
+<li>JWT</li>
+<li>express-validator</li>
+<li>bcryptjs</li>
+<li>dotenv</li>
+</ul>
 
-- Node.js
-- Express
-- MongoDB + Mongoose
-- express-validator
-- JWT (jsonwebtoken)
-
-## Project Structure
-
-```
+<h2>Project Structure</h2>
+<pre>
 src/
   app.js
   server.js
   config/
-    db.js
   controllers/
-    authController.js
-    dashboardController.js
-    recordController.js
-    userController.js
   middleware/
-    authMiddleware.js
-    errorHandler.js
-    notFound.js
-    rbacMiddleware.js
-    validateRequest.js
-    validators.js
   models/
-    FinancialRecord.js
-    User.js
   routes/
-    authRoutes.js
-    dashboardRoutes.js
-    recordRoutes.js
-    userRoutes.js
   services/
-    authService.js
-    dashboardService.js
-    recordService.js
-    userService.js
   utils/
-    ApiError.js
-    asyncHandler.js
-```
+  scripts/
+</pre>
 
-## Setup Instructions
+<h2>Setup Instructions</h2>
 
-1. Install dependencies:
+<ol>
+<li>Install dependencies</li>
+</ol>
+<pre>npm install</pre>
 
-```bash
-npm install
-```
+<ol start="2">
+<li>Create environment file</li>
+</ol>
+<pre>copy .env.example .env</pre>
 
-2. Create environment file:
+<ol start="3">
+<li>Configure environment variables</li>
+</ol>
+<pre>
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret
+JWT_EXPIRES_IN=1d
+</pre>
 
-```bash
-copy .env.example .env
-```
+<ol start="4">
+<li>Run the server</li>
+</ol>
+<pre>npm run dev</pre>
 
-3. Update `.env` values:
+<h2>Seed Admin</h2>
+<pre>npm run seed:admin</pre>
 
-- `PORT` - API port
-- `MONGODB_URI` - MongoDB connection string
-- `JWT_SECRET` - secret key for token signing
-- `JWT_EXPIRES_IN` - token expiration (example: `1d`)
+<p><strong>Credentials:</strong></p>
+<ul>
+<li>Email: admin@example.com</li>
+<li>Password: admin123</li>
+</ul>
 
-4. Run the server:
+<h2>Authentication</h2>
+<p>Use JWT token in request headers:</p>
+<pre>Authorization: Bearer &lt;your_token&gt;</pre>
 
-```bash
-npm run dev
-```
+<h2>API Endpoints</h2>
 
-## API Overview
+<h3>Auth</h3>
+<table border="1" cellpadding="6">
+<tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
+<tr><td>POST</td><td>/api/auth/login</td><td>Public</td><td>Authenticate user and return JWT</td></tr>
+</table>
 
-Base URL: `http://localhost:5000`
+<h3>Users</h3>
+<table border="1" cellpadding="6">
+<tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
+<tr><td>GET</td><td>/api/users</td><td>Admin</td><td>List users</td></tr>
+<tr><td>POST</td><td>/api/users</td><td>Admin</td><td>Create user</td></tr>
+<tr><td>PATCH</td><td>/api/users/:id</td><td>Admin</td><td>Update user role/status</td></tr>
+</table>
 
-### Health
+<h3>Financial Records</h3>
+<table border="1" cellpadding="6">
+<tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
+<tr><td>GET</td><td>/api/records</td><td>Viewer, Analyst, Admin</td><td>List records with filtering/pagination</td></tr>
+<tr><td>GET</td><td>/api/records/:id</td><td>Viewer, Analyst, Admin</td><td>Get single record</td></tr>
+<tr><td>POST</td><td>/api/records</td><td>Admin</td><td>Create record</td></tr>
+<tr><td>PATCH</td><td>/api/records/:id</td><td>Admin</td><td>Update record</td></tr>
+<tr><td>DELETE</td><td>/api/records/:id</td><td>Admin</td><td>Delete record</td></tr>
+</table>
 
-- `GET /health`
+<h3>Dashboard</h3>
+<table border="1" cellpadding="6">
+<tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
+<tr><td>GET</td><td>/api/dashboard/summary</td><td>Analyst, Admin</td><td>Total income, expenses, net balance</td></tr>
+<tr><td>GET</td><td>/api/dashboard/categories</td><td>Analyst, Admin</td><td>Category-wise totals</td></tr>
+<tr><td>GET</td><td>/api/dashboard/trends/monthly</td><td>Analyst, Admin</td><td>Monthly trends</td></tr>
+</table>
 
-### Auth
+<h2>Filtering Example</h2>
+<pre>
+GET /api/records?type=income&category=salary&page=1&limit=10
+</pre>
 
-- `POST /api/auth/login`
-  - Body:
+<h2>Assumptions & Trade-offs</h2>
+<ul>
+<li>Viewer has read-only access to records</li>
+<li>Analyst can access records and dashboard insights</li>
+<li>Admin has full access</li>
+<li>This differs from stricter viewer-dashboard-only models but reflects real-world use cases</li>
+<li>JWT kept simple for assignment scope</li>
+<li>Focus on clean architecture over production-level features</li>
+</ul>
 
-```json
-{
-  "email": "admin@example.com",
-  "password": "secret123"
-}
-```
+<h2>Future Improvements</h2>
+<ul>
+<li>Add automated tests</li>
+<li>Add rate limiting</li>
+<li>Add Swagger/OpenAPI documentation</li>
+<li>Standardize API responses</li>
+<li>Add soft delete and audit logs</li>
+</ul>
 
-### User Management (Admin only)
-
-- `GET /api/users`
-- `POST /api/users`
-- `PATCH /api/users/:id`
-
-Create user body:
-
-```json
-{
-  "name": "Alice",
-  "email": "alice@example.com",
-  "password": "secret123",
-  "role": "viewer",
-  "status": "active"
-}
-```
-
-Update user body (one or both):
-
-```json
-{
-  "role": "analyst",
-  "status": "inactive"
-}
-```
-
-### Financial Records
-
-- `GET /api/records` (viewer, analyst, admin)
-- `GET /api/records/:id` (viewer, analyst, admin)
-- `POST /api/records` (admin)
-- `PATCH /api/records/:id` (admin)
-- `DELETE /api/records/:id` (admin)
-
-Record body:
-
-```json
-{
-  "amount": 1250.5,
-  "type": "income",
-  "category": "Salary",
-  "date": "2026-03-15",
-  "notes": "Monthly salary"
-}
-```
-
-Filtering query params on `GET /api/records`:
-
-- `type=income|expense`
-- `category=...`
-- `startDate=YYYY-MM-DD`
-- `endDate=YYYY-MM-DD`
-- `page=1`
-- `limit=10`
-
-### Dashboard APIs (Analyst, Admin)
-
-- `GET /api/dashboard/summary`
-  - Returns total income, total expenses, and net balance.
-- `GET /api/dashboard/categories`
-  - Returns category-wise totals grouped by type.
-- `GET /api/dashboard/trends/monthly`
-  - Returns monthly aggregates for income and expense.
-
-Optional query parameters for dashboard endpoints:
-
-- `startDate=YYYY-MM-DD`
-- `endDate=YYYY-MM-DD`
-
-## RBAC Matrix
-
-- `viewer`: read-only access to financial records
-- `analyst`: read access + dashboard access
-- `admin`: full access (users + records + dashboard)
-
-## Error Handling
-
-The API returns structured errors:
-
-```json
-{
-  "message": "Validation failed",
-  "details": [
-    {
-      "msg": "Valid email is required",
-      "path": "email"
-    }
-  ]
-}
-```
-
-HTTP status codes are used appropriately (`400`, `401`, `403`, `404`, `409`, `500`).
+<h2>Conclusion</h2>
+<p>
+This backend demonstrates clean architecture, RBAC, validation, and aggregation logic aligned with real-world backend systems.
+</p>

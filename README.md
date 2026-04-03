@@ -1,16 +1,33 @@
 <h1>Finance Dashboard Backend</h1>
 
 <p>
-GitHub Repository: <a href="https://github.com/infinitepush/Finance-Dashboard-Backend">View Project</a>
+GitHub Repository: 
+<a href="https://github.com/infinitepush/Finance-Dashboard-Backend">View Project</a>
 </p>
 
-<h2>Project Overview</h2>
+<p>
+🌐 <strong>Live API:</strong><br>
+<a href="https://finance-dashboard-backend-ns29.onrender.com">
+https://finance-dashboard-backend-ns29.onrender.com
+</a>
+</p>
+
+<p>
+🩺 <strong>Health Check:</strong><br>
+<a href="https://finance-dashboard-backend-ns29.onrender.com/health">
+https://finance-dashboard-backend-ns29.onrender.com/health
+</a>
+</p>
+
+<hr/>
+
+<h2>🚀 Project Overview</h2>
 <p>
 This project is a backend service for a finance dashboard built with Node.js, Express, and MongoDB Atlas.
 It provides secure APIs for user management, financial record management, and dashboard analytics with role-based access control.
 </p>
 
-<h2>Features</h2>
+<h2>✨ Features</h2>
 <ul>
 <li>User and role management (admin, analyst, viewer)</li>
 <li>User status management (active, inactive)</li>
@@ -26,7 +43,7 @@ It provides secure APIs for user management, financial record management, and da
 <li>Admin seed script</li>
 </ul>
 
-<h2>Tech Stack</h2>
+<h2>🛠 Tech Stack</h2>
 <ul>
 <li>Node.js</li>
 <li>Express.js</li>
@@ -38,7 +55,7 @@ It provides secure APIs for user management, financial record management, and da
 <li>dotenv</li>
 </ul>
 
-<h2>Project Structure</h2>
+<h2>📁 Project Structure</h2>
 <pre>
 src/
   app.js
@@ -53,7 +70,7 @@ src/
   scripts/
 </pre>
 
-<h2>Setup Instructions</h2>
+<h2>⚙️ Setup Instructions</h2>
 
 <ol>
 <li>Install dependencies</li>
@@ -80,7 +97,7 @@ JWT_EXPIRES_IN=1d
 </ol>
 <pre>npm run dev</pre>
 
-<h2>Seed Admin</h2>
+<h2>🌱 Seed Admin</h2>
 <pre>npm run seed:admin</pre>
 
 <p><strong>Credentials:</strong></p>
@@ -89,11 +106,11 @@ JWT_EXPIRES_IN=1d
 <li>Password: admin123</li>
 </ul>
 
-<h2>Authentication</h2>
+<h2>🔐 Authentication</h2>
 <p>Use JWT token in request headers:</p>
 <pre>Authorization: Bearer &lt;your_token&gt;</pre>
 
-<h2>How to Test</h2>
+<h2>🧪 How to Test</h2>
 <ul>
 <li>Use Postman or any API client</li>
 <li>Login using seeded admin credentials</li>
@@ -102,12 +119,20 @@ JWT_EXPIRES_IN=1d
 <li>Test protected endpoints</li>
 </ul>
 
-<h2>API Endpoints</h2>
+<h2>🌐 Base URLs</h2>
+<table border="1" cellpadding="6">
+<tr><th>Environment</th><th>URL</th></tr>
+<tr><td>Local</td><td>http://localhost:5000</td></tr>
+<tr><td>Production</td><td>https://finance-dashboard-backend-ns29.onrender.com</td></tr>
+</table>
+
+<h2>📡 API Endpoints</h2>
 
 <h3>Health</h3>
 <table border="1" cellpadding="6">
 <tr><th>Method</th><th>Route</th><th>Access</th><th>Purpose</th></tr>
 <tr><td>GET</td><td>/health</td><td>Public</td><td>Service health check</td></tr>
+<tr><td>GET</td><td>/</td><td>Public</td><td>API status message</td></tr>
 </table>
 
 <h3>Auth</h3>
@@ -142,12 +167,12 @@ JWT_EXPIRES_IN=1d
 <tr><td>GET</td><td>/api/dashboard/trends/monthly</td><td>Analyst, Admin</td><td>Monthly trends</td></tr>
 </table>
 
-<h2>Filtering Example</h2>
+<h2>🔍 Filtering Example</h2>
 <pre>
 GET /api/records?type=income&category=salary&page=1&limit=10
 </pre>
 
-<h2>Assumptions & Trade-offs</h2>
+<h2>⚖️ Assumptions & Trade-offs</h2>
 <ul>
 <li>Viewer has read-only access to financial records</li>
 <li>Analyst can access records and dashboard insights</li>
@@ -157,7 +182,7 @@ GET /api/records?type=income&category=salary&page=1&limit=10
 <li>Focus on clean architecture over production-level features</li>
 </ul>
 
-<h2>Future Improvements</h2>
+<h2>🚧 Future Improvements</h2>
 <ul>
 <li>Add automated tests</li>
 <li>Add rate limiting</li>
@@ -166,7 +191,7 @@ GET /api/records?type=income&category=salary&page=1&limit=10
 <li>Add soft delete and audit logs</li>
 </ul>
 
-<h2>Conclusion</h2>
+<h2>🧠 Conclusion</h2>
 <p>
 This backend demonstrates clean architecture, RBAC, validation, and aggregation logic aligned with real-world backend systems.
 </p>
